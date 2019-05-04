@@ -39,6 +39,17 @@ app.get('/product', (request, response) => {
     })
 }) 
 
+app.post('/product', (request, response) => {
+    const connection = connect();
+    const data = request.body;
+    console.log(`${data.id}`);
+    console.log(`${data.name}`);
+    const statement = `insert into product values('${data.id}','${data.name}')`;
+    connection.query(statement, (error, products) => {
+        console.log(error);
+        response.send(products);
+    })
+}) 
 app.listen(3000,'0.0.0.0', () => {
     console.log(`Server started on 4000`);
 });
